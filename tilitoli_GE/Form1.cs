@@ -14,7 +14,9 @@ namespace tilitoli_GE
 {
     public partial class Form1 : Form
     {
-        public static int meret = 3;
+        public static int meret = 4;
+        private int lassitas = 20;
+
         private Elem[,] palya = new Elem[meret, meret];
 
         private int[] ures;
@@ -127,7 +129,7 @@ namespace tilitoli_GE
 
             if (i < 1000)
             {
-                Thread.Sleep((checkBox1.Checked) ? (10) : (0));
+                Thread.Sleep((checkBox1.Checked) ? (lassitas) : (0));
                 kever(i + 1);
             }
         }
@@ -141,12 +143,37 @@ namespace tilitoli_GE
 
             if (tesztele)
             {
-                MessageBox.Show("Alma");
+                gyozelem_vizsgal(0, 0, 0, true);
+            }
+        }
+
+        private void gyozelem_vizsgal(int sor, int oszlop, int sorszam, bool mehet)
+        {
+            if (palya[sor, oszlop] != null && Convert.ToInt32(palya[sor, oszlop].Maga.Name) != sorszam)
+            {
+                mehet = false;
+            }
+
+            oszlop += 1;
+            if (oszlop == meret)
+            {
+                sor += 1;
+                oszlop = 0;
+            }
+
+            if (sorszam < meret * meret - 1 )
+            {
+                gyozelem_vizsgal(sor, oszlop, sorszam + 1, mehet);
+            }
+            else if (mehet)
+            {
+                MessageBox.Show("Sikeresen kiraktad a számokat!", "Winner", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            lassitas = Convert.ToInt32(numericUpDown1.Value);
             kever(0);
         }
 
