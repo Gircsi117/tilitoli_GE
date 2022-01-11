@@ -127,7 +127,7 @@ namespace tilitoli_GE
                 mozgat(sor, oszlop, false);
             }
 
-            if (i < 1000)
+            if (i < (meret * meret) * 100)
             {
                 Thread.Sleep((checkBox1.Checked) ? (lassitas) : (0));
                 kever(i + 1);
